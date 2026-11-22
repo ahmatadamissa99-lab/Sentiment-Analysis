@@ -2,6 +2,7 @@
 Sentiment Analysis Application
 Natural Language Processing (NLP) Classification System
 Trained on Kaggle Benchmark Multi-Domain Sentiment Dataset
+Theme: Modern Dark Mode (Black, Electric Violet, Royal Blue)
 """
 
 import os
@@ -29,72 +30,100 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Clean, professional, human-crafted design (no flashy neon gradients or AI boilerplate)
+# Modern Dark UI: Black (#090A10), Electric Violet (#8B5CF6), and Royal Blue (#2563EB)
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
-    html, body, [class*="css"] {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        color: #0F172A;
+    /* Global Dark Theme */
+    html, body, [class*="css"], .stApp {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: #090A10 !important;
+        color: #F8FAFC !important;
     }
 
-    /* Clean Application Header */
+    /* Sidebar Dark Styling */
+    section[data-testid="stSidebar"] {
+        background-color: #0E1019 !important;
+        border-right: 1px solid rgba(139, 92, 246, 0.18) !important;
+    }
+    section[data-testid="stSidebar"] h4,
+    section[data-testid="stSidebar"] .stMarkdown p {
+        color: #E2E8F0 !important;
+    }
+    section[data-testid="stSidebar"] .stCaption {
+        color: #94A3B8 !important;
+    }
+
+    /* Header with Black, Violet & Blue Accents */
     .app-header {
-        padding: 0.8rem 0 1.6rem 0;
-        border-bottom: 1px solid #E2E8F0;
+        padding: 0.6rem 0 1.4rem 0;
+        border-bottom: 1px solid rgba(139, 92, 246, 0.2);
         margin-bottom: 1.8rem;
+        position: relative;
+    }
+    .app-header::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 140px;
+        height: 2px;
+        background: linear-gradient(90deg, #8B5CF6, #3B82F6);
+        box-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
     }
     .app-title {
-        font-size: 1.85rem;
-        font-weight: 700;
+        font-size: 2.1rem;
+        font-weight: 800;
         letter-spacing: -0.025em;
-        color: #0F172A;
         margin: 0;
+        background: linear-gradient(90deg, #FFFFFF 30%, #C084FC 70%, #60A5FA 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
     .app-subtitle {
-        font-size: 0.95rem;
-        color: #64748B;
-        margin-top: 0.35rem;
-        margin-bottom: 0.8rem;
-    }
-    .status-badge {
-        display: inline-flex;
-        align-items: center;
-        background: #F1F5F9;
-        border: 1px solid #E2E8F0;
-        color: #475569;
-        font-size: 0.78rem;
-        font-weight: 500;
-        padding: 3px 10px;
-        border-radius: 6px;
-        margin-right: 8px;
+        font-size: 0.96rem;
+        color: #94A3B8 !important;
+        margin-top: 0.4rem;
+        margin-bottom: 0;
     }
 
-    /* Card Panels */
+    /* Modern Dark Cards */
     .card-panel {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 10px;
-        padding: 1.25rem 1.4rem;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        background: #111322;
+        border: 1px solid rgba(139, 92, 246, 0.18);
+        border-radius: 12px;
+        padding: 1.3rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
         margin-bottom: 1rem;
     }
 
-    /* Verdict Display */
+    /* Verdict Display Container */
     .verdict-container {
-        border-radius: 10px;
+        border-radius: 12px;
         padding: 1.4rem 1.6rem;
-        border: 1px solid #E2E8F0;
-        background: #FFFFFF;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(139, 92, 246, 0.25);
+        background: #111322;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+        position: relative;
+        overflow: hidden;
     }
+    .verdict-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #8B5CF6 0%, #3B82F6 100%);
+    }
+
     .badge-positive {
         display: inline-flex;
         align-items: center;
-        background: #ECFDF5;
-        color: #065F46;
-        border: 1px solid #A7F3D0;
+        background: rgba(16, 185, 129, 0.14);
+        color: #34D399;
+        border: 1px solid rgba(52, 211, 153, 0.35);
         font-size: 0.85rem;
         font-weight: 600;
         padding: 4px 12px;
@@ -103,9 +132,9 @@ st.markdown("""
     .badge-negative {
         display: inline-flex;
         align-items: center;
-        background: #FEF2F2;
-        color: #991B1B;
-        border: 1px solid #FECACA;
+        background: rgba(244, 63, 94, 0.14);
+        color: #FB7185;
+        border: 1px solid rgba(251, 113, 133, 0.35);
         font-size: 0.85rem;
         font-weight: 600;
         padding: 4px 12px;
@@ -114,103 +143,176 @@ st.markdown("""
     .badge-neutral {
         display: inline-flex;
         align-items: center;
-        background: #F8FAFC;
-        color: #475569;
-        border: 1px solid #CBD5E1;
+        background: rgba(139, 92, 246, 0.14);
+        color: #C084FC;
+        border: 1px solid rgba(192, 132, 252, 0.35);
         font-size: 0.85rem;
         font-weight: 600;
         padding: 4px 12px;
         border-radius: 9999px;
     }
     .verdict-headline {
-        font-size: 1.4rem;
-        font-weight: 700;
-        margin-top: 0.7rem;
+        font-size: 1.6rem;
+        font-weight: 800;
+        margin-top: 0.75rem;
         margin-bottom: 0.2rem;
-        color: #0F172A;
+        color: #FFFFFF !important;
+        letter-spacing: -0.01em;
     }
     .verdict-confidence {
-        font-size: 0.9rem;
-        color: #64748B;
-        margin-bottom: 1rem;
+        font-size: 0.92rem;
+        color: #94A3B8 !important;
+        margin-bottom: 1.2rem;
     }
 
-    /* KPI Metric Cards */
+    /* KPI Stat Boxes */
     .stat-box {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 8px;
-        padding: 1rem 1.2rem;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        background: #111322;
+        border: 1px solid rgba(139, 92, 246, 0.2);
+        border-radius: 10px;
+        padding: 1.1rem 1.3rem;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+        position: relative;
+        overflow: hidden;
+    }
+    .stat-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, #8B5CF6, #3B82F6);
     }
     .stat-label {
         font-size: 0.78rem;
         font-weight: 600;
-        color: #64748B;
+        color: #A5B4FC !important;
         text-transform: uppercase;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.05em;
     }
     .stat-number {
-        font-size: 1.65rem;
-        font-weight: 700;
-        color: #0F172A;
-        margin-top: 0.25rem;
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: #FFFFFF !important;
+        margin-top: 0.3rem;
     }
     .stat-note {
         font-size: 0.75rem;
-        color: #94A3B8;
+        color: #64748B !important;
         margin-top: 0.2rem;
     }
 
-    /* Token Chips */
+    /* Token Chips in Dark Mode */
     .token-tag {
         display: inline-block;
-        background: #F1F5F9;
-        color: #334155;
-        border: 1px solid #E2E8F0;
-        padding: 2px 8px;
-        border-radius: 4px;
+        background: #181B2E;
+        color: #C7D2FE;
+        border: 1px solid rgba(139, 92, 246, 0.25);
+        padding: 3px 9px;
+        border-radius: 5px;
         font-size: 0.8rem;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-family: 'JetBrains Mono', monospace;
         margin: 2px 4px;
     }
     .token-negation {
         display: inline-block;
-        background: #FEE2E2;
-        color: #991B1B;
-        border: 1px solid #FCA5A5;
+        background: rgba(239, 68, 68, 0.18);
+        color: #FCA5A5;
+        border: 1px solid rgba(239, 68, 68, 0.4);
         font-weight: 600;
-        padding: 2px 8px;
-        border-radius: 4px;
+        padding: 3px 9px;
+        border-radius: 5px;
         font-size: 0.8rem;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-family: 'JetBrains Mono', monospace;
         margin: 2px 4px;
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.2);
     }
 
-    /* Clean Tab navigation */
+    /* Tabs Styling */
     .stTabs [data-baseweb="tab-list"] {
         gap: 6px;
-        border-bottom: 1px solid #E2E8F0;
+        border-bottom: 1px solid rgba(139, 92, 246, 0.2) !important;
         padding-bottom: 2px;
+        background-color: transparent !important;
     }
     .stTabs [data-baseweb="tab"] {
         border-radius: 6px 6px 0 0;
-        padding: 8px 16px;
+        padding: 9px 18px;
         font-weight: 500;
-        font-size: 0.9rem;
-        color: #64748B;
+        font-size: 0.92rem;
+        color: #94A3B8 !important;
+        background-color: transparent !important;
     }
     .stTabs [aria-selected="true"] {
-        color: #0F172A !important;
+        color: #C084FC !important;
+        font-weight: 700 !important;
+        border-bottom: 2px solid #8B5CF6 !important;
+        text-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+    }
+
+    /* Primary Buttons (Violet to Blue Gradient) */
+    button[kind="primary"], .stButton > button[kind="primary"] {
+        background: linear-gradient(135deg, #7C3AED 0%, #2563EB 100%) !important;
+        color: #FFFFFF !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
         font-weight: 600 !important;
-        border-bottom: 2px solid #0F172A !important;
-        background-color: transparent !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 16px rgba(124, 58, 237, 0.35) !important;
+        transition: all 0.2s ease !important;
+    }
+    button[kind="primary"]:hover, .stButton > button[kind="primary"]:hover {
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45) !important;
+        transform: translateY(-1px) !important;
+    }
+
+    /* Secondary Buttons */
+    .stButton > button {
+        background-color: #131522 !important;
+        color: #E2E8F0 !important;
+        border: 1px solid rgba(139, 92, 246, 0.25) !important;
+        border-radius: 8px !important;
+    }
+    .stButton > button:hover {
+        border-color: #8B5CF6 !important;
+        color: #FFFFFF !important;
+    }
+
+    /* Form Inputs & Textarea */
+    .stTextArea textarea {
+        background-color: #111322 !important;
+        color: #F8FAFC !important;
+        border: 1px solid rgba(139, 92, 246, 0.28) !important;
+        border-radius: 8px !important;
+    }
+    .stTextArea textarea:focus {
+        border-color: #8B5CF6 !important;
+        box-shadow: 0 0 12px rgba(139, 92, 246, 0.35) !important;
+    }
+    .stTextInput input {
+        background-color: #111322 !important;
+        color: #F8FAFC !important;
+        border: 1px solid rgba(139, 92, 246, 0.28) !important;
+        border-radius: 8px !important;
+    }
+    .stSelectbox div[data-baseweb="select"] {
+        background-color: #111322 !important;
+        color: #F8FAFC !important;
+        border: 1px solid rgba(139, 92, 246, 0.28) !important;
+        border-radius: 8px !important;
+    }
+
+    /* Dataframe Table Dark Theme */
+    [data-testid="stDataFrame"] {
+        border: 1px solid rgba(139, 92, 246, 0.2) !important;
+        border-radius: 8px !important;
+        background-color: #0E1019 !important;
     }
 
     /* Headings */
     h3, h4, h5 {
-        font-weight: 600;
-        color: #0F172A;
+        font-weight: 700 !important;
+        color: #FFFFFF !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -250,33 +352,33 @@ dataset_df = load_dataset()
 # Sidebar: Settings & Presets
 # ==========================================
 with st.sidebar:
-    st.markdown("#### Settings & Model")
+    st.markdown("#### Classifier Settings")
     
     if bundle is not None:
         available_models = list(bundle["models"].keys())
         default_idx = available_models.index(bundle["best_model_name"]) if bundle["best_model_name"] in available_models else 0
         
         selected_model_name = st.selectbox(
-            "Classifier Model",
+            "Active Model",
             options=available_models,
             index=default_idx,
             help="Choose between supervised algorithms trained on TF-IDF n-grams."
         )
 
-        st.caption(f"Feature count: **{metrics_data.get('vocab_size', 1752):,}** n-grams")
+        st.caption(f"Vocabulary: **{metrics_data.get('vocab_size', 1752):,}** n-gram features")
         st.markdown("---")
 
-        st.markdown("#### Preprocessing Options")
+        st.markdown("#### Preprocessing")
         remove_stopwords = st.checkbox(
             "Filter stopwords (preserve negations)",
             value=False,
-            help="Removes common stopwords while retaining 'not', 'never', 'cannot'."
+            help="Removes common stopwords while strictly retaining 'not', 'never', 'cannot'."
         )
         show_token_debug = st.checkbox("Show preprocessing inspection", value=True)
 
         st.markdown("---")
-        st.markdown("#### Sample Queries")
-        st.caption("Click to test representative reviews:")
+        st.markdown("#### Test Presets")
+        st.caption("Click to evaluate sample inputs:")
 
         preset_chosen = None
         if st.button("Positive: 'Wow! Fantastic movie & cast'"):
@@ -291,7 +393,7 @@ with st.sidebar:
             preset_chosen = "I was not impressed by the battery life. Died within 3 hours. Will not recommend."
 
     st.markdown("---")
-    st.caption("Sentiment Analysis")
+    st.caption("Sentiment Analysis • NLP Platform")
 
 
 # ==========================================
@@ -376,7 +478,7 @@ with tab1:
     col_input, col_result = st.columns([1.1, 0.9], gap="large")
 
     with col_input:
-        st.markdown("##### Text Input")
+        st.markdown("##### Input Text")
         default_text = preset_chosen if preset_chosen else "Wow! This is remarkably amazing, exceeded all my expectations!"
         user_input = st.text_area(
             "Review or sentence to evaluate:",
@@ -389,7 +491,7 @@ with tab1:
         char_count = len(user_input)
         word_count = len(user_input.split())
         st.markdown(f"""
-        <div style="font-size: 0.8rem; color: #64748B; margin-top: -6px; margin-bottom: 12px;">
+        <div style="font-size: 0.8rem; color: #94A3B8; margin-top: -6px; margin-bottom: 12px;">
             {word_count} words &bull; {char_count} characters
         </div>
         """, unsafe_allow_html=True)
@@ -410,21 +512,27 @@ with tab1:
             <div class="verdict-container">
                 <span class="{badge_style}">&bull; {pred} Sentiment</span>
                 <div class="verdict-headline">{pred}</div>
-                <div class="verdict-confidence">Confidence: <b>{conf * 100:.1f}%</b></div>
+                <div class="verdict-confidence">Model Confidence: <b style="color: #60A5FA;">{conf * 100:.1f}%</b></div>
             """, unsafe_allow_html=True)
 
-            # Clean horizontal bars for class probabilities
+            # Modern Violet & Blue horizontal probability progress bars
             for sentiment_name, prob_val in probs.items():
                 pct = prob_val * 100
-                bar_color = "#10B981" if sentiment_name == "Positive" else ("#EF4444" if sentiment_name == "Negative" else "#94A3B8")
+                if sentiment_name == "Positive":
+                    bar_gradient = "linear-gradient(90deg, #059669, #10B981)"
+                elif sentiment_name == "Negative":
+                    bar_gradient = "linear-gradient(90deg, #DC2626, #F43F5E)"
+                else:
+                    bar_gradient = "linear-gradient(90deg, #7C3AED, #3B82F6)"
+                    
                 st.markdown(f"""
-                <div style="margin-bottom: 8px;">
-                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 3px;">
-                        <span style="font-weight: 500; color: #334155;">{sentiment_name}</span>
-                        <span style="font-weight: 600; color: #0F172A;">{pct:.1f}%</span>
+                <div style="margin-bottom: 9px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 4px;">
+                        <span style="font-weight: 500; color: #E2E8F0;">{sentiment_name}</span>
+                        <span style="font-weight: 700; color: #FFFFFF;">{pct:.1f}%</span>
                     </div>
-                    <div style="background: #F1F5F9; border-radius: 4px; height: 6px; overflow: hidden;">
-                        <div style="background: {bar_color}; width: {pct}%; height: 100%; border-radius: 4px;"></div>
+                    <div style="background: rgba(255, 255, 255, 0.08); border-radius: 4px; height: 7px; overflow: hidden;">
+                        <div style="background: {bar_gradient}; width: {pct}%; height: 100%; border-radius: 4px;"></div>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
@@ -438,16 +546,16 @@ with tab1:
         
         col_t1, col_t2 = st.columns(2, gap="medium")
         with col_t1:
-            st.markdown("<span style='font-size: 0.82rem; font-weight: 600; color: #64748B;'>NORMALIZED TEXT</span>", unsafe_allow_html=True)
+            st.markdown("<span style='font-size: 0.82rem; font-weight: 600; color: #A5B4FC;'>NORMALIZED TEXT</span>", unsafe_allow_html=True)
             st.code(result["cleaned_text"], language="text")
 
         with col_t2:
-            st.markdown("<span style='font-size: 0.82rem; font-weight: 600; color: #64748B;'>TOKEN BREAKDOWN</span>", unsafe_allow_html=True)
+            st.markdown("<span style='font-size: 0.82rem; font-weight: 600; color: #A5B4FC;'>TOKENIZED UNITS</span>", unsafe_allow_html=True)
             if result["tokens"]:
                 tokens_html = ""
                 for t in result["tokens"]:
                     if t in NEGATION_WORDS:
-                        tokens_html += f'<span class="token-negation">{t} (negation)</span>'
+                        tokens_html += f'<span class="token-negation">{t} [negation]</span>'
                     else:
                         tokens_html += f'<span class="token-tag">{t}</span>'
                 st.markdown(tokens_html, unsafe_allow_html=True)
@@ -563,25 +671,25 @@ with tab2:
                 """, unsafe_allow_html=True)
             with s2:
                 st.markdown(f"""
-                <div class="stat-box" style="border-top: 3px solid #10B981;">
-                    <div class="stat-label">Positive</div>
-                    <div class="stat-number">{pos_cnt}</div>
+                <div class="stat-box" style="border-color: rgba(16, 185, 129, 0.4);">
+                    <div class="stat-label" style="color: #34D399 !important;">Positive</div>
+                    <div class="stat-number" style="color: #34D399 !important;">{pos_cnt}</div>
                     <div class="stat-note">{pos_cnt/total_n*100:.1f}% of total</div>
                 </div>
                 """, unsafe_allow_html=True)
             with s3:
                 st.markdown(f"""
-                <div class="stat-box" style="border-top: 3px solid #EF4444;">
-                    <div class="stat-label">Negative</div>
-                    <div class="stat-number">{neg_cnt}</div>
+                <div class="stat-box" style="border-color: rgba(244, 63, 94, 0.4);">
+                    <div class="stat-label" style="color: #FB7185 !important;">Negative</div>
+                    <div class="stat-number" style="color: #FB7185 !important;">{neg_cnt}</div>
                     <div class="stat-note">{neg_cnt/total_n*100:.1f}% of total</div>
                 </div>
                 """, unsafe_allow_html=True)
             with s4:
                 st.markdown(f"""
-                <div class="stat-box" style="border-top: 3px solid #94A3B8;">
-                    <div class="stat-label">Neutral</div>
-                    <div class="stat-number">{neu_cnt}</div>
+                <div class="stat-box" style="border-color: rgba(139, 92, 246, 0.4);">
+                    <div class="stat-label" style="color: #C084FC !important;">Neutral</div>
+                    <div class="stat-number" style="color: #C084FC !important;">{neu_cnt}</div>
                     <div class="stat-note">{neu_cnt/total_n*100:.1f}% of total</div>
                 </div>
                 """, unsafe_allow_html=True)
@@ -595,14 +703,15 @@ with tab2:
                     values=[pos_cnt, neg_cnt, neu_cnt],
                     hole=0.6,
                     color=["Positive", "Negative", "Neutral"],
-                    color_discrete_map={"Positive": "#10B981", "Negative": "#EF4444", "Neutral": "#94A3B8"},
+                    color_discrete_map={"Positive": "#10B981", "Negative": "#F43F5E", "Neutral": "#8B5CF6"},
                     title="<b>Sentiment Distribution</b>"
                 )
                 fig_donut.update_layout(
                     height=280,
                     margin=dict(l=10, r=10, t=40, b=10),
                     paper_bgcolor="rgba(0,0,0,0)",
-                    font=dict(family="Inter")
+                    font=dict(color="#E2E8F0", family="Plus Jakarta Sans"),
+                    legend=dict(font=dict(color="#E2E8F0"))
                 )
                 st.plotly_chart(fig_donut, width="stretch")
 
@@ -613,7 +722,7 @@ with tab2:
                         x="category",
                         color="Predicted_Sentiment",
                         barmode="group",
-                        color_discrete_map={"Positive": "#10B981", "Negative": "#EF4444", "Neutral": "#94A3B8"},
+                        color_discrete_map={"Positive": "#10B981", "Negative": "#F43F5E", "Neutral": "#8B5CF6"},
                         title="<b>Sentiment by Category</b>"
                     )
                     cat_chart.update_layout(
@@ -621,7 +730,9 @@ with tab2:
                         margin=dict(l=10, r=10, t=40, b=10),
                         paper_bgcolor="rgba(0,0,0,0)",
                         plot_bgcolor="rgba(0,0,0,0)",
-                        font=dict(family="Inter"),
+                        font=dict(color="#E2E8F0", family="Plus Jakarta Sans"),
+                        xaxis=dict(gridcolor="rgba(255,255,255,0.06)", tickfont=dict(color="#CBD5E1")),
+                        yaxis=dict(gridcolor="rgba(255,255,255,0.06)", tickfont=dict(color="#CBD5E1")),
                         xaxis_title="",
                         yaxis_title="Count"
                     )
@@ -639,7 +750,9 @@ with tab2:
                         margin=dict(l=10, r=10, t=40, b=10),
                         paper_bgcolor="rgba(0,0,0,0)",
                         plot_bgcolor="rgba(0,0,0,0)",
-                        font=dict(family="Inter")
+                        font=dict(color="#E2E8F0", family="Plus Jakarta Sans"),
+                        xaxis=dict(gridcolor="rgba(255,255,255,0.06)", tickfont=dict(color="#CBD5E1")),
+                        yaxis=dict(gridcolor="rgba(255,255,255,0.06)", tickfont=dict(color="#CBD5E1"))
                     )
                     st.plotly_chart(conf_hist, width="stretch")
 
@@ -687,6 +800,13 @@ with tab3:
         labels = metrics_data["labels"]
         cm_cols = st.columns(len(metrics_data["models"]))
 
+        # Violet & Blue custom matrix theme
+        matrix_colorscale = [
+            [0.0, "#0E1019"],
+            [0.3, "#2563EB"],
+            [1.0, "#8B5CF6"]
+        ]
+
         for i, (m_name, m_info) in enumerate(metrics_data["models"].items()):
             with cm_cols[i]:
                 cm_matrix = m_info["confusion_matrix"]
@@ -696,14 +816,16 @@ with tab3:
                     x=labels,
                     y=labels,
                     text_auto=True,
-                    color_continuous_scale="Blues",
+                    color_continuous_scale=matrix_colorscale,
                     title=f"<b>{m_name}</b>"
                 )
                 fig_cm.update_layout(
                     height=280,
                     margin=dict(l=10, r=10, t=40, b=10),
                     paper_bgcolor="rgba(0,0,0,0)",
-                    font=dict(family="Inter")
+                    font=dict(color="#E2E8F0", family="Plus Jakarta Sans"),
+                    xaxis=dict(tickfont=dict(color="#CBD5E1")),
+                    yaxis=dict(tickfont=dict(color="#CBD5E1"))
                 )
                 st.plotly_chart(fig_cm, width="stretch")
 
@@ -771,7 +893,7 @@ with tab4:
                 dataset_df,
                 x="sentiment",
                 color="sentiment",
-                color_discrete_map={"Positive": "#10B981", "Negative": "#EF4444", "Neutral": "#94A3B8"},
+                color_discrete_map={"Positive": "#10B981", "Negative": "#F43F5E", "Neutral": "#8B5CF6"},
                 title="<b>Class Distribution</b>"
             )
             fig_bar.update_layout(
@@ -780,7 +902,9 @@ with tab4:
                 paper_bgcolor="rgba(0,0,0,0)",
                 plot_bgcolor="rgba(0,0,0,0)",
                 showlegend=False,
-                font=dict(family="Inter")
+                font=dict(color="#E2E8F0", family="Plus Jakarta Sans"),
+                xaxis=dict(gridcolor="rgba(255,255,255,0.06)", tickfont=dict(color="#CBD5E1")),
+                yaxis=dict(gridcolor="rgba(255,255,255,0.06)", tickfont=dict(color="#CBD5E1"))
             )
             st.plotly_chart(fig_bar, width="stretch")
 
@@ -789,6 +913,7 @@ with tab4:
                 dataset_df,
                 x="category",
                 color="category",
+                color_discrete_sequence=["#8B5CF6", "#3B82F6", "#06B6D4", "#6366F1", "#A855F7", "#2563EB"],
                 title="<b>Reviews by Category</b>"
             )
             fig_cat.update_layout(
@@ -797,7 +922,9 @@ with tab4:
                 paper_bgcolor="rgba(0,0,0,0)",
                 plot_bgcolor="rgba(0,0,0,0)",
                 showlegend=False,
-                font=dict(family="Inter")
+                font=dict(color="#E2E8F0", family="Plus Jakarta Sans"),
+                xaxis=dict(gridcolor="rgba(255,255,255,0.06)", tickfont=dict(color="#CBD5E1")),
+                yaxis=dict(gridcolor="rgba(255,255,255,0.06)", tickfont=dict(color="#CBD5E1"))
             )
             st.plotly_chart(fig_cat, width="stretch")
 
