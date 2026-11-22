@@ -1,0 +1,187 @@
+{
+  "best_model": "Logistic Regression",
+  "labels": [
+    "Negative",
+    "Neutral",
+    "Positive"
+  ],
+  "vocab_size": 1752,
+  "train_samples": 2880,
+  "test_samples": 720,
+  "models": {
+    "Logistic Regression": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "cv_mean": 1.0,
+      "cv_std": 0.0,
+      "confusion_matrix": [
+        [
+          240,
+          0,
+          0
+        ],
+        [
+          0,
+          240,
+          0
+        ],
+        [
+          0,
+          0,
+          240
+        ]
+      ],
+      "classification_report": {
+        "Negative": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 240.0
+        },
+        "Neutral": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 240.0
+        },
+        "Positive": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 240.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 720.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 720.0
+        }
+      }
+    },
+    "Multinomial Naive Bayes": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "cv_mean": 1.0,
+      "cv_std": 0.0,
+      "confusion_matrix": [
+        [
+          240,
+          0,
+          0
+        ],
+        [
+          0,
+          240,
+          0
+        ],
+        [
+          0,
+          0,
+          240
+        ]
+      ],
+      "classification_report": {
+        "Negative": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 240.0
+        },
+        "Neutral": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 240.0
+        },
+        "Positive": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 240.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 720.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 720.0
+        }
+      }
+    },
+    "Linear SVM (Calibrated)": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "cv_mean": 1.0,
+      "cv_std": 0.0,
+      "confusion_matrix": [
+        [
+          240,
+          0,
+          0
+        ],
+        [
+          0,
+          240,
+          0
+        ],
+        [
+          0,
+          0,
+          240
+        ]
+      ],
+      "classification_report": {
+        "Negative": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 240.0
+        },
+        "Neutral": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 240.0
+        },
+        "Positive": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 240.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 720.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 720.0
+        }
+      }
+    }
+  }
+}
