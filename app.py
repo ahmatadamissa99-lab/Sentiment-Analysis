@@ -291,19 +291,14 @@ with st.sidebar:
             preset_chosen = "I was not impressed by the battery life. Died within 3 hours. Will not recommend."
 
     st.markdown("---")
-    st.caption("Sentiment Analysis • Assignment Submission")
+    st.caption("Sentiment Analysis")
 
 
 # ==========================================
 # Application Header
 # ==========================================
-st.markdown(f"""
+st.markdown("""
 <div class="app-header">
-    <div style="margin-bottom: 0.4rem;">
-        <span class="status-badge">Assignment</span>
-        <span class="status-badge">Model: {selected_model_name}</span>
-        <span class="status-badge">3,600 Benchmark Reviews</span>
-    </div>
     <h1 class="app-title">Sentiment Analysis</h1>
     <p class="app-subtitle">
         Natural Language Processing system using text normalization, negation-aware TF-IDF vectorization,
